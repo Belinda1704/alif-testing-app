@@ -1,13 +1,13 @@
 name: CI Pipeline
 
-# Run on push to feature branches and PRs to main
+# Run on push to feature branches and PRs to master
 on:
   push:
     branches-ignore:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   backend-tests:
