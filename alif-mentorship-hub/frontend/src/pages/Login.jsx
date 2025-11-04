@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/axios";
-import { motion } from "framer-motion";
 
 const Login = () => {
   const [role, setRole] = useState("student");

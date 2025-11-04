@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 export default function AboutUs() {
   return (
     <section className="relative py-16 md:py-24 bg-linear-to-b from-[#F8FAFC] to-[#E2E8F0] overflow-hidden">

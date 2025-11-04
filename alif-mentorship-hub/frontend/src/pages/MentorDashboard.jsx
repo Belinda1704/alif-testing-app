@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../services/axios";
 import DashboardNavbar from "../components/DashboardNavbar";
 
@@ -7,7 +6,6 @@ const MentorDashboard = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState(null); // to show status update in progress
-  const navigate = useNavigate();
 
   const fetchApplications = async () => {
     try {

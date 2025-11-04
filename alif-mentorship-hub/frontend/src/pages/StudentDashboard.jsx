@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../services/axios";
 import ApplicationForm from "../components/ApplicationForm";
 import DashboardNavbar from "../components/DashboardNavbar";
@@ -8,7 +7,6 @@ const StudentDashboard = () => {
   const [application, setApplication] = useState(null);
   const [studentName, setStudentName] = useState("");
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   const fetchApplication = async () => {
     try {

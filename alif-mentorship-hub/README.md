@@ -94,6 +94,32 @@ Teachers, mentors, NGOs, parents, and institutions supporting youth development 
 - Node.js 16+
 - npm or yarn
 
+### Quick Setup with Docker (Recommended)
+
+The easiest way to run the application is using Docker Compose:
+
+1. **Make sure Docker and Docker Compose are installed**
+
+2. **Start the application:**
+   ```bash
+   docker-compose up
+   ```
+
+3. **Access the application:**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - Admin Panel: http://localhost:8000/admin
+
+4. **Stop the application:**
+   ```bash
+   docker-compose down
+   ```
+
+To rebuild after making changes:
+```bash
+docker-compose up --build
+```
+
 ### Quick Setup (Windows)
 
 1. **Run the setup script:**

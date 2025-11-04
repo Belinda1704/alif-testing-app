@@ -2,13 +2,14 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Mentor, StudentApplication
 
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ['id','username','email','first_name','last_name','password','password2']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'password2']
 
     def validate(self, data):
         if data['password'] != data['password2']:
@@ -23,12 +24,14 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
 class MentorSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
     class Meta:
         model = Mentor
         fields = ['id', 'user', 'specialization', 'bio', 'available']
+
 
 class StudentApplicationSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
@@ -43,9 +46,9 @@ class StudentApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentApplication
         fields = [
-            'id','user','mentor','mentor_id','first_name','last_name','dob','gender',
-            'national_id','phone','email','address','previous_school','previous_grade',
-            'gpa','course','certificate','transcript','passport_photo',
-            'recommendation_letter','status','feedback','consultation_date',
-            'created_at','updated_at'
+            'id', 'user', 'mentor', 'mentor_id', 'first_name', 'last_name', 'dob', 'gender',
+            'national_id', 'phone', 'email', 'address', 'previous_school', 'previous_grade',
+            'gpa', 'course', 'certificate', 'transcript', 'passport_photo',
+            'recommendation_letter', 'status', 'feedback', 'consultation_date',
+            'created_at', 'updated_at'
         ]

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import api from "../services/axios";
 import { useNavigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
     username: "",
     email: "",
     password: "",
@@ -64,6 +65,46 @@ const Signup = () => {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
+            {/* First Name Field */}
+            <div>
+              <label htmlFor="first_name" className="block text-sm font-semibold text-gray-700 mb-2">
+                First Name
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  name="first_name"
+                  id="first_name"
+                  placeholder="Enter your first name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  required
+                />
+                <span className="absolute right-3 top-3 text-gray-400">👤</span>
+              </div>
+            </div>
+
+            {/* Last Name Field */}
+            <div>
+              <label htmlFor="last_name" className="block text-sm font-semibold text-gray-700 mb-2">
+                Last Name
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  name="last_name"
+                  id="last_name"
+                  placeholder="Enter your last name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  required
+                />
+                <span className="absolute right-3 top-3 text-gray-400">👤</span>
+              </div>
+            </div>
+
             {/* Username Field */}
             <div>
               <label htmlFor="username" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -74,14 +115,15 @@ const Signup = () => {
                   type="text"
                   name="username"
                   id="username"
-                  placeholder="Choose a username"
+                  placeholder="Choose a unique username (no spaces)"
                   value={formData.username}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   required
                 />
-                <span className="absolute right-3 top-3 text-gray-400">👤</span>
+                <span className="absolute right-3 top-3 text-gray-400">@</span>
               </div>
+              <p className="mt-1 text-xs text-gray-500">Letters, numbers, and @/./+/-/_ only</p>
             </div>
 
             {/* Email Field */}

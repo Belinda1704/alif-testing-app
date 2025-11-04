@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Backend service (Django API)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: alif-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app              # Live code updates
+      - backend-db:/app/db.sqlite3   # Persist database
+      - backend-media:/app/media     # Persist uploaded files
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=src.alif_mentorship_hub.settings
+      - PYTHONUNBUFFERED=1
+    networks:
+      - alif-network
+    restart: unless-stopped
+
+  # Frontend service (React + Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: alif-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - alif-network
+    restart: unless-stopped
+
+# Named volumes for data persistence
+volumes:
+  backend-db:
+  backend-media:
+
+# Custom network for inter-service communication
+networks:
+  alif-network:
+    driver: bridge
+
