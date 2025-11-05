@@ -1,13 +1,13 @@
 name: CI Pipeline
 
-# Run on push to feature branches and PRs to main
+# Run on push to feature branches and PRs to master
 on:
   push:
     branches-ignore:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   backend-tests:
@@ -33,20 +33,20 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd backend
+          cd alif-mentorship-hub/backend
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install flake8
 
       - name: Lint with flake8
         run: |
-          cd backend
+          cd alif-mentorship-hub/backend
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Run tests
         run: |
-          cd backend
+          cd alif-mentorship-hub/backend
           python manage.py test
 
   frontend-tests:
@@ -60,22 +60,20 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
         run: |
-          cd frontend
-          npm ci
+          cd alif-mentorship-hub/frontend
+          npm install
 
       - name: Lint frontend
         run: |
-          cd frontend
+          cd alif-mentorship-hub/frontend
           npm run lint
 
       - name: Build frontend
         run: |
-          cd frontend
+          cd alif-mentorship-hub/frontend
           npm run build
 
   # Only run if tests pass
@@ -92,15 +90,16 @@ jobs:
 
       - name: Build backend Docker image
         run: |
-          cd backend
+          cd alif-mentorship-hub/backend
           docker build -t alif-backend:test .
 
       - name: Build frontend Docker image
         run: |
-          cd frontend
+          cd alif-mentorship-hub/frontend
           docker build -t alif-frontend:test .
 
       - name: Test docker-compose
         run: |
+          cd alif-mentorship-hub
           docker-compose config
 
