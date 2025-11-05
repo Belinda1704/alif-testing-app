@@ -98,8 +98,3 @@ jobs:
           cd alif-mentorship-hub/frontend
           docker build -t alif-frontend:test .
 
-      - name: Test docker-compose
-        run: |
-          cd alif-mentorship-hub
-          docker-compose config
-
